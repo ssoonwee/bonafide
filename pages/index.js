@@ -28,7 +28,7 @@ export default function Home() {
     let account = accounts[0];
     provider.on('accountsChanged', function (accounts) {
         account = accounts[0];
-        //console.log(address); // Print new address
+        console.log(account + "haha"); // Print new address
     });
     const signer = provider.getSigner()
     const loggedOnAddress = await signer.getAddress()
@@ -41,13 +41,11 @@ export default function Home() {
       const tokenUri = await contract.tokenURI(i.tokenId)
       const meta = await axios.get(tokenUri)
       let price = ethers.utils.formatUnits(i.price.toString(), 'ether')
-      console.log(i.seller)
-      console.log(loggedOnAddress)
+      //console.log(i.seller)
+      //console.log(loggedOnAddress)
       if(i.seller == loggedOnAddress){
-        console.log("Is here?")
         setOwner(true)
       } else{
-        console.log("Is here??")
         setOwner(false)
       }
       let item = {
@@ -103,10 +101,10 @@ export default function Home() {
                 </div>
                 <div className="p-4 bg-black">
                   <p className="text-2xl font-bold text-white">{nft.price} MATIC</p>
-                  {
-                    !isOwner && 
+                  {/* {
+                    (!isOwner && nft.isSellingState) && 
                     <button className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => buyNft(nft)}>Buy</button>
-                  }
+                  } */}
                   <button className="mt-4 w-full bg-pink-500 text-white font-bold py-2 px-12 rounded" onClick={() => viewNFT(nft)}>View</button>
                 </div>
               </div>

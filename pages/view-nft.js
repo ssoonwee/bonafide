@@ -15,6 +15,7 @@ import { list } from 'postcss'
 export default function ViewNFT() {
   const [nft, setNft] = useState([])
   const [isSoldStatus, setSoldStatus] = useState(false)
+  const [isAvailable, setAvailableStatus] = useState(false)
   const [loadingState, setLoadingState] = useState('not-loaded')
   const [isOwner, setOwnerState] = useState(false)
   const [formInput, updateFormInput] = useState({ name: '', description: '', price: '', image: '' })
@@ -69,7 +70,10 @@ export default function ViewNFT() {
       status: status
     }
     setNft(item)
-    setLoadingState('loaded') 
+    setLoadingState('loaded')
+    if(status == 2){
+      setAvailableStatus(true)
+    }
   }
 
   async function buyNFT() {
@@ -147,7 +151,7 @@ export default function ViewNFT() {
           )
         }
         {
-          !isOwner && (
+          (!isOwner && isAvailable) && (
         <button onClick={buyNFT} className="font-bold mt-4 bg-pink-500 text-white rounded p-4 shadow-lg">
           Buy
         </button>
